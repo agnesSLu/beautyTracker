@@ -50,17 +50,11 @@ public class BeautyTracker {
 
     // When user enter, first show the user the whole collection we have
     private static void displayProductCollection() {
-        String query = "SELECT product.product_name, product.price, product.size, product.url, product.expiration_date, " +
-                "concern.concern_name, type.type_name, brand.brand_name " +
-                "FROM product " +
-                "LEFT JOIN concern ON product.concern_name = concern.concern_name " +
-                "LEFT JOIN type ON product.type_name = type.type_name " +
-                "LEFT JOIN brand ON product.brand_name = brand.brand_name " +
-                "ORDER BY product.product_name";
+        String procedureCall = "{CALL DisplayProductCollection()}";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
+             CallableStatement callableStatement = connection.prepareCall(procedureCall);
+             ResultSet resultSet = callableStatement.executeQuery()) {
 
             int productCount = 0;
             while (resultSet.next()) {
@@ -150,9 +144,9 @@ public class BeautyTracker {
         String brandName = scanner.nextLine();
         addBrandDetails(scanner, brandName);
 
-        // Add SQL insertion logic for product
+
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO product (product_name, price, size, url, expiration_date, concern_name, type_name, brand_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+             CallableStatement statement = connection.prepareCall("{CALL addNewProduct(?, ?, ?, ?, ?, ?, ?, ?)}")) {
 
             statement.setString(1, productName);
             statement.setDouble(2, price);
@@ -173,6 +167,7 @@ public class BeautyTracker {
             e.printStackTrace();
         }
 
+
         // Ask if the user wants to add ingredient details
         System.out.print("Do you want to add ingredient details? (yes/no): ");
         if (scanner.nextLine().equalsIgnoreCase("yes")) {
@@ -192,92 +187,93 @@ public class BeautyTracker {
     }
 
     private static String getCurrencySymbol(Scanner scanner) {
-        System.out.println("Select the currency:");
-        System.out.println("1. Euro (€)");
-        System.out.println("2. US Dollars ($)");
-        System.out.println("3. Canadian Dollars (C$)");
-        System.out.println("4. British Pounds (£)");
-        System.out.println("5. Japanese Yen (JPY¥)");
-        System.out.println("6. Chinese Yuan (CN¥)");
-        System.out.println("7. Hong Kong Dollars (HK$)");
-        System.out.println("8. Korean Won (₩)");
-        System.out.println("9. Peruvian Sols (S/.)");
-        System.out.print("Enter your choice: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        String currencySymbol;
+        int choice;
 
-        switch (choice) {
-            case 1 -> {
-                return "€";
+        do {
+            System.out.println("Select the currency:");
+            System.out.println("1. Euro (€)");
+            System.out.println("2. US Dollars ($)");
+            System.out.println("3. Canadian Dollars (C$)");
+            System.out.println("4. British Pounds (£)");
+            System.out.println("5. Japanese Yen (JPY¥)");
+            System.out.println("6. Chinese Yuan (CN¥)");
+            System.out.println("7. Hong Kong Dollars (HK$)");
+            System.out.println("8. Korean Won (₩)");
+            System.out.println("9. Peruvian Sols (S/.)");
+            System.out.print("Enter your choice: ");
+
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1 -> currencySymbol = "€";
+                    case 2 -> currencySymbol = "$";
+                    case 3 -> currencySymbol = "C$";
+                    case 4 -> currencySymbol = "£";
+                    case 5 -> currencySymbol = "JPY¥";
+                    case 6 -> currencySymbol = "CN¥";
+                    case 7 -> currencySymbol = "HK$";
+                    case 8 -> currencySymbol = "₩";
+                    case 9 -> currencySymbol = "S/.";
+                    default -> {
+                        System.out.println("Wrong answer, please select again.");
+                        currencySymbol = null;
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Consume the invalid input
+                currencySymbol = null;
             }
-            case 2 -> {
-                return "$";
-            }
-            case 3 -> {
-                return "C$";
-            }
-            case 4 -> {
-                return "£";
-            }
-            case 5 -> {
-                return "JPY¥";
-            }
-            case 6 -> {
-                return "CN¥";
-            }
-            case 7 -> {
-                return "HK$";
-            }
-            case 8 -> {
-                return "₩";
-            }
-            case 9 -> {
-                return "S/.";
-            }
-            default -> {
-                System.out.println("Invalid choice, defaulting to US Dollars ($)");
-                return "$";
-            }
-        }
+        } while (currencySymbol == null);
+
+        return currencySymbol;
     }
 
-    private static String getSizeUnit(Scanner scanner) {
-        System.out.println("Select the size unit:");
-        System.out.println("1. Milliliters (ml)");
-        System.out.println("2. Liters (l)");
-        System.out.println("3. Ounces (oz)");
-        System.out.println("4. Kilograms (kg)");
-        System.out.println("5. Grams (g)");
-        System.out.println("6. Other");
-        System.out.print("Enter your choice: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
 
-        switch (choice) {
-            case 1 -> {
-                return "ml";
+    private static String getSizeUnit(Scanner scanner) {
+        String sizeUnit;
+        int choice;
+
+        do {
+            System.out.println("Select the size unit:");
+            System.out.println("1. Milliliters (ml)");
+            System.out.println("2. Liters (l)");
+            System.out.println("3. Ounces (oz)");
+            System.out.println("4. Kilograms (kg)");
+            System.out.println("5. Grams (g)");
+            System.out.println("6. Other");
+            System.out.print("Enter your choice: ");
+
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1 -> sizeUnit = "ml";
+                    case 2 -> sizeUnit = "l";
+                    case 3 -> sizeUnit = "oz";
+                    case 4 -> sizeUnit = "kg";
+                    case 5 -> sizeUnit = "g";
+                    case 6 -> {
+                        System.out.print("Enter the size unit: ");
+                        sizeUnit = scanner.nextLine().trim();
+                    }
+                    default -> {
+                        System.out.println("Wrong answer, please select again.");
+                        sizeUnit = null;
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Consume the invalid input
+                sizeUnit = null;
             }
-            case 2 -> {
-                return "l";
-            }
-            case 3 -> {
-                return "oz";
-            }
-            case 4 -> {
-                return "kg";
-            }
-            case 5 -> {
-                return "g";
-            }
-            case 6 -> {
-                System.out.print("Enter the size unit: ");
-                return scanner.nextLine().trim();
-            }
-            default -> {
-                System.out.println("Invalid choice, defaulting to grams (g)");
-                return "g";
-            }
-        }
+        } while (sizeUnit == null);
+
+        return sizeUnit;
     }
 
 
@@ -297,9 +293,7 @@ public class BeautyTracker {
         boolean isFragranceFree = getBooleanInput(scanner, "Is it fragrance-free? (yes/no): ");
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO ingredient " +
-                     "(ingredient_name, is_cruelty_free, is_clean_beauty, is_fragrance_free, product_name) " +
-                     "VALUES (?, ?, ?, ?, ?)")) {
+             CallableStatement statement = connection.prepareCall("{CALL AddIngredientDetails(?, ?, ?, ?, ?)}")) {
 
             statement.setString(1, ingredientName);
             statement.setBoolean(2, isCrueltyFree);
@@ -313,6 +307,7 @@ public class BeautyTracker {
             e.printStackTrace();
         }
     }
+
 
     private static boolean getBooleanInput(Scanner scanner, String prompt) {
         String input;
@@ -345,18 +340,16 @@ public class BeautyTracker {
         boolean sustainablePackage = getBooleanInput(scanner, "Is the package sustainable? (yes/no): ");
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO package " +
-                     "(product_name, color, material, weight, refill_available, sustainable_package) " +
-                     "VALUES (?, ?, ?, ?, ?, ?)")) {
+             CallableStatement statement = connection.prepareCall("{CALL AddPackageDetails(?, ?, ?, ?, ?, ?)}")) {
 
             statement.setString(1, productName);
-            if (color.isEmpty()) statement.setNull(2, java.sql.Types.VARCHAR); else statement.setString(2, color);
-            if (material.isEmpty()) statement.setNull(3, java.sql.Types.VARCHAR); else statement.setString(3, material);
+            statement.setString(2, color.isEmpty() ? null : color);
+            statement.setString(3, material.isEmpty() ? null : material);
             statement.setDouble(4, weight);
             statement.setBoolean(5, refillAvailable);
             statement.setBoolean(6, sustainablePackage);
 
-            statement.executeUpdate();
+            statement.execute();
             System.out.println("Package details added successfully.");
         } catch (SQLException e) {
             System.out.println("An error occurred while trying to add package details.");
@@ -365,6 +358,7 @@ public class BeautyTracker {
             System.out.println("Invalid input for weight. Please enter a number.");
         }
     }
+
 
 
     private static void addBrandDetails(Scanner scanner, String brandName) {
@@ -424,6 +418,50 @@ public class BeautyTracker {
         }
     }
 
+
+
+
+
+
+    private static void editConcern() {
+        System.out.print("Enter the concern to update: ");
+        String concernName = scanner.nextLine().trim();
+
+        System.out.println("Enter the new description for the concern '" + concernName + "' (leave blank to delete the description):");
+        String newDescription = scanner.nextLine().trim();
+
+        String userConfirmation = "no";
+        if (newDescription.isEmpty()) {
+            System.out.println("Are you sure you want to delete the description for this concern? (yes/no):");
+            userConfirmation = scanner.nextLine().trim();
+            if (!userConfirmation.equalsIgnoreCase("yes")) {
+                System.out.println("Description update canceled.");
+                return;
+            }
+        }
+
+        String query = "CALL EditConcern(?, ?, ?)";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, concernName);
+            statement.setString(2, newDescription);
+            statement.setString(3, userConfirmation);
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                System.out.println(rs.getString("Result"));
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to update the concern.");
+            e.printStackTrace();
+        }
+    }
+
+
+
+
     private static void setStringOrNull(PreparedStatement statement, int parameterIndex, String value) throws SQLException {
         if (value.isEmpty()) {
             statement.setNull(parameterIndex, java.sql.Types.VARCHAR);
@@ -439,17 +477,12 @@ public class BeautyTracker {
         String description = scanner.nextLine();
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO concern (concern_name, c_description) VALUES (?, ?) ON DUPLICATE KEY UPDATE c_description = ?")) {
+             CallableStatement statement = connection.prepareCall("{CALL AddOrUpdateConcern(?, ?)}")) {
 
             statement.setString(1, concernName);
-            if (description.isEmpty()) {
-                statement.setNull(2, java.sql.Types.VARCHAR); // Set to NULL if the description is empty
-            } else {
-                statement.setString(2, description);
-            }
-            statement.setString(3, description);
+            statement.setString(2, description);
 
-            statement.executeUpdate();
+            statement.execute();
             System.out.println("Concern details added successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -458,23 +491,25 @@ public class BeautyTracker {
 
 
 
+
     // optional
     private static void addTypeDetails(Scanner scanner, String typeName) {
         System.out.print("Enter type description: ");
         String description = scanner.nextLine();
 
-        // Insert or update type details in the database
+        // Call the stored procedure to add or update type details in the database
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO type (type_name) VALUES (?) ON DUPLICATE KEY UPDATE type_name = ?")) {
+             CallableStatement statement = connection.prepareCall("{CALL addOrUpdateType(?, ?)}")) {
 
             statement.setString(1, typeName);
-            statement.setString(2, typeName);
+            statement.setString(2, description);
 
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     private static void viewAllProducts(Scanner scanner) {
         String query = "SELECT product_name FROM product ORDER BY product_name";
@@ -538,8 +573,7 @@ public class BeautyTracker {
         System.out.print("Enter the product name to select: ");
         String productName = scanner.nextLine();
 
-        String query = "SELECT product_name, price, size, url, expiration_date, concern_name, type_name, brand_name " +
-                "FROM product WHERE product_name = ?";
+        String query = "CALL selectProduct(?)"; // Call the stored procedure
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -550,7 +584,7 @@ public class BeautyTracker {
                 if (resultSet.next()) {
                     // Extracting product details
                     double price = resultSet.getDouble("price");
-                    int size = resultSet.getInt("size");
+                    String size = resultSet.getString("size");
                     String url = resultSet.getString("url");
                     Date expirationDate = resultSet.getDate("expiration_date");
                     String concernName = resultSet.getString("concern_name");
@@ -576,6 +610,8 @@ public class BeautyTracker {
     }
 
 
+
+
     // filter products by any keyword
     private static void filterProductsByKeyword() {
         List<String> filteredProductNames = new ArrayList<>();
@@ -583,26 +619,12 @@ public class BeautyTracker {
         String keyword = scanner.nextLine().trim();
         String searchKeyword = "%" + keyword + "%";
 
-        String query = "SELECT DISTINCT product.product_name, product.price, product.size, product.url, product.expiration_date, " +
-                "concern.concern_name, type.type_name, brand.brand_name, function_table.f_name, brand.country_of_origin " +
-                "FROM product " +
-                "LEFT JOIN concern ON product.concern_name = concern.concern_name " +
-                "LEFT JOIN type ON product.type_name = type.type_name " +
-                "LEFT JOIN brand ON product.brand_name = brand.brand_name " +
-                "LEFT JOIN function_table ON product.type_name = function_table.type_name " +
-                "LEFT JOIN ingredient ON product.product_name = ingredient.product_name " +
-                "LEFT JOIN package ON product.product_name = package.product_name " +
-                "WHERE product.product_name LIKE ? OR type.type_name LIKE ? OR brand.brand_name LIKE ? " +
-                "OR concern.concern_name LIKE ? OR ingredient.ingredient_name LIKE ? " +
-                "OR package.color LIKE ? OR package.material LIKE ? " +
-                "OR function_table.f_name LIKE ? OR brand.country_of_origin LIKE ?";
+        String query = "CALL filterProductsByKeyword(?)"; // Calling the stored procedure
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            for (int i = 1; i <= 9; i++) {
-                statement.setString(i, searchKeyword);
-            }
+            statement.setString(1, searchKeyword);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 boolean isResultFound = false;
@@ -650,24 +672,17 @@ public class BeautyTracker {
 
 
     private static void viewSelectedProduct(String productName) {
-        String query = "SELECT product.product_name, product.price, product.size, product.url, product.expiration_date, " +
-                "concern.concern_name, type.type_name, brand.brand_name " +
-                "FROM product " +
-                "LEFT JOIN concern ON product.concern_name = concern.concern_name " +
-                "LEFT JOIN type ON product.type_name = type.type_name " +
-                "LEFT JOIN brand ON product.brand_name = brand.brand_name " +
-                "WHERE product.product_name = ?";
+        String query = "{CALL ViewSelectedProduct(?)}";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             CallableStatement statement = connection.prepareCall(query)) {
 
             statement.setString(1, productName);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    // Assuming these are the details you want to display
                     double price = resultSet.getDouble("price");
-                    int size = resultSet.getInt("size");
+                    String size = resultSet.getString("size"); // Assuming size is a String
                     String url = resultSet.getString("url");
                     Date expirationDate = resultSet.getDate("expiration_date");
                     String concernName = resultSet.getString("concern_name");
@@ -684,15 +699,16 @@ public class BeautyTracker {
                     System.out.println("2. Delete this product");
                     System.out.println("3. Go back");
                     System.out.print("Enter your choice: ");
+
                     int actionChoice = scanner.nextInt();
                     scanner.nextLine(); // Consume newline
 
                     switch (actionChoice) {
                         case 1:
-                            editMenu(); // Call editProduct method with productName
+                            editMenu(); // Implement this method to edit the product
                             break;
                         case 2:
-                            deleteProduct(productName); // Call deleteProduct method with productName
+                            deleteProduct(productName); // Implement this method to delete the product
                             break;
                         case 3:
                             return; // Go back without any action
@@ -707,6 +723,7 @@ public class BeautyTracker {
             e.printStackTrace();
         }
     }
+
 
 
     private static void deleteProduct(String productName) {
@@ -747,8 +764,14 @@ public class BeautyTracker {
 
             switch (choice) {
                 case 1:
+                    System.out.print("Enter the product name to edit: ");
                     String productName = scanner.nextLine();
-                    editProduct(productName);
+                    System.out.println("Which field would you like to update? Options: price, size, url, expiration_date, concern_name, type_name, brand_name");
+                    System.out.print("Enter the field to update: ");
+                    String field = scanner.nextLine().trim();
+                    System.out.println("Enter the new value for " + field + " (leave blank to delete):");
+                    String newValue = scanner.nextLine().trim();
+                    editProduct(productName, field, newValue);
                     break;
                 case 2:
                     editBrand(); // Implement this method
@@ -778,127 +801,50 @@ public class BeautyTracker {
 
 
 
-    public static void editProduct(String productName) {
-        // Check if the product exists in the database before proceeding
-        if (!isProductExist(productName)) {
-            System.out.println("Product '" + productName + "' does not exist.");
-            return;
-        }
 
-        System.out.println("Which field would you like to update for '" + productName + "'?");
-        System.out.println("Options: price, size, url, expiration_date, concern_name, type_name, brand_name");
-        System.out.print("Enter the field to update: ");
-        String field = scanner.nextLine().trim();
-
-        // Verify if the chosen field is valid
-        List<String> validFields = Arrays.asList("price", "size", "url", "expiration_date", "concern_name", "type_name", "brand_name");
-        if (!validFields.contains(field)) {
-            System.out.println("Invalid field selected.");
-            return;
-        }
-
-        System.out.println("Enter the new value for " + field + " (leave blank to delete):");
-        String newValue = scanner.nextLine().trim();
-
-        // Confirm before deleting the field
-        if (newValue.isEmpty() && (field.equals("url") || field.equals("expiration_date") || field.equals("size"))) {
-            System.out.print("Are you sure you want to delete the " + field + "? (yes/no): ");
-            String confirmation = scanner.nextLine().trim().toLowerCase();
-            if (!confirmation.equals("yes")) {
-                System.out.println(field + " deletion cancelled.");
-                return;
-            }
-        }
-
-        String query = "UPDATE product SET " + field + " = ? WHERE product_name = ?";
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            // Set the appropriate value type based on the field
-            switch (field) {
-                case "price" -> statement.setDouble(1, Double.parseDouble(newValue));
-                case "size" -> statement.setInt(1, Integer.parseInt(newValue));
-                case "expiration_date" -> {
-                    if (!newValue.isEmpty()) {
-                        statement.setDate(1, Date.valueOf(newValue));
-                    } else {
-                        statement.setNull(1, Types.DATE);
-                    }
-                }
-                default -> {
-                    if (!newValue.isEmpty()) {
-                        statement.setString(1, newValue);
-                    } else {
-                        statement.setNull(1, Types.VARCHAR);
-                    }
-                }
-            }
-            statement.setString(2, productName);
-
-            int rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Product '" + productName + "' has been updated.");
-            } else {
-                System.out.println("Product not found or could not be updated.");
-            }
-        } catch (SQLException e) {
-            System.out.println("An error occurred while trying to update the product.");
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input for the numerical field.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Invalid date format. Please use YYYY-MM-DD.");
-        }
-    }
-
-    private static boolean isProductExist(String productName) {
-        String query = "SELECT COUNT(*) FROM product WHERE product_name = ?";
+    public static void editProduct(String productName, String field, String newValue) {
+        String query = "CALL editProduct(?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, productName);
+            statement.setString(2, field);
+            statement.setString(3, newValue);
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    int count = resultSet.getInt(1);
-                    return count > 0;
-                }
-            }
+            statement.execute();
+            System.out.println("Product '" + productName + "' has been updated.");
         } catch (SQLException e) {
-            System.out.println("An error occurred while checking the product existence.");
-            e.printStackTrace();
+            System.out.println("An error occurred while trying to update the product: " + e.getMessage());
         }
-        return false;
     }
+
 
     private static void editType() {
         System.out.print("Enter the type to update (e.g., skincare, makeup): ");
         String typeName = scanner.nextLine().trim();
 
-        System.out.println("Enter the new description for the type '" + typeName + "':");
-        String newDescription = scanner.nextLine().trim();
+        System.out.print("Enter the new name for the type '" + typeName + "': ");
+        String newTypeName = scanner.nextLine().trim();
 
-        String query = "UPDATE type SET type_description = ? WHERE type_name = ?";
+        String query = "CALL updateType(?, ?)";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setString(1, newDescription);
-            statement.setString(2, typeName);
+            statement.setString(1, typeName);
+            statement.setString(2, newTypeName);
 
-            int rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Type '" + typeName + "' has been updated.");
-            } else {
-                System.out.println("Type not found or could not be updated.");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                System.out.println(resultSet.getString("message"));
             }
         } catch (SQLException e) {
             System.out.println("An error occurred while trying to update the type.");
             e.printStackTrace();
         }
     }
+
 
     private static void editBrand() {
         System.out.print("Enter the brand name to update: ");
@@ -928,19 +874,12 @@ public class BeautyTracker {
             }
         }
 
-        String query = "UPDATE brand SET " + field + " = ? WHERE brand_name = ?";
-
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             CallableStatement statement = connection.prepareCall("{CALL EditBrandDetail(?, ?, ?)}")) {
 
-            if (field.equals("founding_year") && !newValue.isEmpty()) {
-                statement.setInt(1, Integer.parseInt(newValue));
-            } else if (newValue.isEmpty()) {
-                statement.setNull(1, java.sql.Types.VARCHAR); // Set to NULL if the field is emptied
-            } else {
-                statement.setString(1, newValue);
-            }
-            statement.setString(2, brandName);
+            statement.setString(1, brandName);
+            statement.setString(2, field);
+            statement.setString(3, newValue);
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -957,45 +896,7 @@ public class BeautyTracker {
     }
 
 
-    private static void editConcern() {
-        System.out.print("Enter the concern to update: ");
-        String concernName = scanner.nextLine().trim();
 
-        System.out.println("Enter the new description for the concern '" + concernName + "' (leave blank to delete the description):");
-        String newDescription = scanner.nextLine().trim();
-
-        if (newDescription.isEmpty()) {
-            System.out.println("Are you sure you want to delete the description for this concern? (yes/no):");
-            String confirmation = scanner.nextLine().trim();
-            if (!confirmation.equalsIgnoreCase("yes")) {
-                System.out.println("Description update canceled.");
-                return;
-            }
-        }
-
-        String query = "UPDATE concern SET c_description = ? WHERE concern_name = ?";
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            if (newDescription.isEmpty()) {
-                statement.setNull(1, java.sql.Types.VARCHAR);
-            } else {
-                statement.setString(1, newDescription);
-            }
-            statement.setString(2, concernName);
-
-            int rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Concern '" + concernName + "' has been updated.");
-            } else {
-                System.out.println("Concern not found or could not be updated.");
-            }
-        } catch (SQLException e) {
-            System.out.println("An error occurred while trying to update the concern.");
-            e.printStackTrace();
-        }
-    }
 
 
     private static void editFunction() {
@@ -1005,11 +906,13 @@ public class BeautyTracker {
         System.out.print("Enter the new name for the function: ");
         String newFunctionName = scanner.nextLine().trim();
 
-        System.out.print("Enter the new description for the function (leave blank to delete): ");
+        System.out.print("Enter the new description for the function (leave blank if not applicable): ");
         String newDescription = scanner.nextLine().trim();
 
+        boolean deleteDescription = newDescription.isEmpty();
+
         // Confirm before deleting the description
-        if (newDescription.isEmpty()) {
+        if (deleteDescription) {
             System.out.print("Are you sure you want to delete the description? (yes/no): ");
             String confirmation = scanner.nextLine().trim();
             if (!confirmation.equalsIgnoreCase("yes")) {
@@ -1018,23 +921,20 @@ public class BeautyTracker {
             }
         }
 
-        String query = "UPDATE function_table SET f_name = ?, f_description = ? WHERE f_name = ?";
+        String query = "CALL EditFunction(?, ?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setString(1, newFunctionName);
-            if (newDescription.isEmpty()) {
-                statement.setNull(2, java.sql.Types.VARCHAR); // Set to NULL if the description is empty
-            } else {
-                statement.setString(2, newDescription);
-            }
-            statement.setString(3, functionName);
+            statement.setString(1, functionName);
+            statement.setString(2, newFunctionName);
+            statement.setString(3, newDescription);
+            statement.setBoolean(4, deleteDescription);
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Function '" + functionName + "' has been updated to '" + newFunctionName + "'.");
-                if (newDescription.isEmpty()) {
+                if (deleteDescription) {
                     System.out.println("Description deleted successfully.");
                 }
             } else {
@@ -1072,18 +972,13 @@ public class BeautyTracker {
             }
         }
 
-        String query = "UPDATE ingredient SET " + field + " = ? WHERE ingredient_name = ?";
+        String query = "CALL edit_ingredient(?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            if (field.equals("ingredient_name") || field.equals("is_cruelty_free") || field.equals("is_clean_beauty") || field.equals("is_fragrance_free")) {
-                if (newValue.isEmpty()) {
-                    statement.setNull(1, java.sql.Types.VARCHAR);  // Set to NULL if the value is empty
-                } else {
-                    statement.setBoolean(1, Boolean.parseBoolean(newValue));
-                }
-            }
-            statement.setString(2, ingredientName);
+            statement.setString(1, ingredientName);
+            statement.setString(2, field);
+            statement.setString(3, newValue);
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -1118,41 +1013,13 @@ public class BeautyTracker {
         System.out.println("Enter the new value for " + field + " (leave blank to clear):");
         String newValue = scanner.nextLine().trim();
 
-        // Confirmation for clearing color or material fields
-        if (newValue.isEmpty() && (field.equals("color") || field.equals("material"))) {
-            System.out.print("Are you sure you want to clear the " + field + "? (yes/no): ");
-            if (!scanner.nextLine().trim().equalsIgnoreCase("yes")) {
-                System.out.println("Update cancelled.");
-                return;
-            }
-        }
-
-        // Build and execute SQL query
-        String query = "UPDATE package SET " + field + " = ? WHERE product_name = ?";
+        // Call stored procedure
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             CallableStatement statement = connection.prepareCall("{CALL update_package(?, ?, ?)}")) {
 
-            if (field.equals("weight")) {
-                if (!newValue.isEmpty()) {
-                    statement.setDouble(1, Double.parseDouble(newValue));
-                } else {
-                    statement.setNull(1, java.sql.Types.DOUBLE);
-                }
-            } else if (field.equals("refill_available") || field.equals("sustainable_package")) {
-                if (!newValue.isEmpty()) {
-                    boolean booleanValue = "yes".equalsIgnoreCase(newValue);
-                    statement.setBoolean(1, booleanValue);
-                } else {
-                    statement.setBoolean(1, false); // Setting default to false when cleared
-                }
-            } else {
-                if (!newValue.isEmpty()) {
-                    statement.setString(1, newValue);
-                } else {
-                    statement.setNull(1, java.sql.Types.VARCHAR);
-                }
-            }
-            statement.setString(2, productName);
+            statement.setString(1, productName);
+            statement.setString(2, field);
+            statement.setString(3, newValue);
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -1163,10 +1030,7 @@ public class BeautyTracker {
         } catch (SQLException e) {
             System.out.println("An error occurred while trying to update the package.");
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input for the weight field.");
         }
     }
-
 
 }
