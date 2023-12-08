@@ -1,901 +1,1172 @@
-***REMOVED***
-
-***REMOVED***
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-                System.out.println(productCount + ". Product Name: " + productName + ", Price: " + price +
-                        ", Size: " + size + ", URL: " + url + ", Expiration Date: " + expirationDate +
-                        ", Concern: " + concernName + ", Type: " + typeName + ", Brand: " + brandName);
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-        // Prompt for product details
-***REMOVED***
-***REMOVED***
-
-        System.out.print("Enter price: ");
-***REMOVED***
-***REMOVED***
-
-        System.out.print("Enter size: ");
-        int size = scanner.nextInt();
-***REMOVED***
-
-        System.out.print("Enter URL: ");
-***REMOVED***
-
-        System.out.print("Enter expiration date (YYYY-MM-DD): ");
-        String expirationDate = scanner.nextLine();
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-        System.out.print("Enter type (skincare, makeup, etc.): ");
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-            statement.setInt(3, size);
-***REMOVED***
-            statement.setDate(5, java.sql.Date.valueOf(expirationDate));
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO ingredient (ingredient_name, is_cruelty_free, is_clean_beauty, is_fragrance_free, product_name) VALUES (?, ?, ?, ?, ?)")) {
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else if (input.equals("no")) {
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-        System.out.print("Enter package color: ");
-***REMOVED***
-
-        System.out.print("Enter package material: ");
-***REMOVED***
-
-        System.out.print("Enter package weight: ");
-        double weight = scanner.nextDouble();
-***REMOVED***
-
-        System.out.print("Is refill available? (true/false): ");
-        boolean refillAvailable = scanner.nextBoolean();
-
-        System.out.print("Is the package sustainable? (true/false): ");
-        boolean sustainablePackage = scanner.nextBoolean();
-***REMOVED***
-
-***REMOVED***
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO package (product_name, color, material, weight, refill_available, sustainable_package) VALUES (?, ?, ?, ?, ?, ?)")) {
-
-***REMOVED***
-            statement.setString(2, color);
-            statement.setString(3, material);
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-        System.out.print("Enter brand description: ");
-***REMOVED***
-
-        System.out.print("Enter country of origin: ");
-***REMOVED***
-
-        System.out.print("Enter founding year: ");
-        int foundingYear = scanner.nextInt();
-***REMOVED***
-
-        System.out.print("Enter email: ");
-***REMOVED***
-
-        System.out.print("Enter telephone number: ");
-        int tel = scanner.nextInt();
-***REMOVED***
-
-        System.out.print("Enter founder name: ");
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO brand (brand_name, b_description, country_of_origin, founding_year, email, tel, founder) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE b_description = ?, country_of_origin = ?, founding_year = ?, email = ?, tel = ?, founder = ?")) {
-
-***REMOVED***
-            statement.setString(2, description);
-            statement.setString(3, country);
-            statement.setInt(4, foundingYear);
-            statement.setString(5, email);
-            statement.setInt(6, tel);
-            statement.setString(7, founder);
-***REMOVED***
-            statement.setString(8, description);
-            statement.setString(9, country);
-            statement.setInt(10, foundingYear);
-            statement.setString(11, email);
-            statement.setInt(12, tel);
-            statement.setString(13, founder);
-
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-        System.out.print("Enter concern description: ");
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-            statement.setString(2, description);
-***REMOVED***
-
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** // Consume newline
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    ***REMOVED*** else {
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
-                    // Additional code to display product details can be added here if needed
-    ***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    ***REMOVED*** else {
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-                    editProduct(); // Implement this method
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** // Exit the edit menu
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-
-    private static void editProduct() {
-        System.out.print("Enter the name of the product to edit: ");
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-        System.out.println("Enter the new value for " + field + ":");
-***REMOVED***
-
-        // Building the SQL Update Query
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-            if (field.equals("price")) {
-                statement.setDouble(1, Double.parseDouble(newValue));
-***REMOVED*** else if (field.equals("size")) {
-***REMOVED***
-***REMOVED*** else if (field.equals("expiration_date")) {
-                statement.setDate(1, java.sql.Date.valueOf(newValue));
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (NumberFormatException e) {
-***REMOVED***
-***REMOVED*** catch (IllegalArgumentException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-        System.out.println("Enter the new value for " + field + ":");
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-            // Handle special cases for data types
-            if (field.equals("founding_year")) {
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-                System.out.println("Brand '" + brandName + "' has been updated.");
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (NumberFormatException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-        System.out.println("Enter the new description for the concern '" + concernName + "':");
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-        System.out.print("Enter the new description for the function: ");
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-            statement.setString(2, newDescription);
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-                System.out.println("Function '" + functionName + "' has been updated to '" + newFunctionName + "' with new description.");
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-        System.out.println("Options: is_cruelty_free, is_clean_beauty, is_fragrance_free");
-***REMOVED***
-***REMOVED***
-
-        List<String> validFields = Arrays.asList("is_cruelty_free", "is_clean_beauty", "is_fragrance_free");
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-        System.out.println("Enter the new value for " + field + " (true/false):");
-        boolean newValue = Boolean.parseBoolean(scanner.nextLine().trim());
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-            statement.setBoolean(1, newValue);
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-        System.out.println("Enter the new value for " + field + ":");
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-                statement.setDouble(1, Double.parseDouble(newValue));
-***REMOVED*** else if (field.equals("refill_available") || field.equals("sustainable_package")) {
-                statement.setBoolean(1, Boolean.parseBoolean(newValue));
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED*** else {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (SQLException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED*** catch (NumberFormatException e) {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-
-
-
-
-
-
-
-***REMOVED***
+package application;
+
+import java.sql.*;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import io.github.cdimascio.dotenv.Dotenv;
+public class BeautyTracker {
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/beautytracker";
+    private static final String USER = "root";
+
+    private static final String PASSWORD = Dotenv.configure().load().get("DB_PASSWORD");
+    private static final Scanner scanner = new Scanner(System.in);
+
+
+    // main function
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Current Product Collection:");
+        displayProductCollection();
+
+        while (true) {
+            System.out.println("\nMain Menu:");
+            System.out.println("1. Add New Product");
+            System.out.println("2. View and Choose Products");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    addNewProduct(scanner);
+                    break;
+                case 2:
+                    viewAndChooseProducts(scanner);
+                    break;
+                case 3:
+                    System.out.println("Exiting application.");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+
+    // When user enter, first show the user the whole collection we have
+    private static void displayProductCollection() {
+        String query = "SELECT product.product_name, product.price, product.size, product.url, product.expiration_date, " +
+                "concern.concern_name, type.type_name, brand.brand_name " +
+                "FROM product " +
+                "LEFT JOIN concern ON product.concern_name = concern.concern_name " +
+                "LEFT JOIN type ON product.type_name = type.type_name " +
+                "LEFT JOIN brand ON product.brand_name = brand.brand_name " +
+                "ORDER BY product.product_name";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            int productCount = 0;
+            while (resultSet.next()) {
+                productCount++;
+                String productName = resultSet.getString("product_name");
+                double price = resultSet.getDouble("price");
+                int size = resultSet.getInt("size");
+                String url = resultSet.getString("url");
+                Date expirationDate = resultSet.getDate("expiration_date");
+                String concernName = resultSet.getString("concern_name");
+                String typeName = resultSet.getString("type_name");
+                String brandName = resultSet.getString("brand_name");
+
+                System.out.println("Product #" + productCount + ":");
+                System.out.println("  Name: " + productName);
+                System.out.println("  Price: " + price);
+                System.out.println("  Size: " + size);
+                System.out.println("  URL: " + url);
+                System.out.println("  Expiration Date: " + (expirationDate != null ? expirationDate.toString() : "N/A"));
+                System.out.println("  Concern: " + concernName);
+                System.out.println("  Type: " + typeName);
+                System.out.println("  Brand: " + brandName);
+                System.out.println();
+            }
+
+            if (productCount == 0) {
+                System.out.println("The current product collection is empty.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to display the product collection.");
+            e.printStackTrace();
+        }
+    }
+
+
+    // add new products to the collection
+    private static void addNewProduct(Scanner scanner) {
+        System.out.println("Enter product details...");
+
+        System.out.print("Enter product name: ");
+        String productName = scanner.nextLine();
+        if (productName.length() > 255) {
+            System.out.println("Product name is too long and will be truncated.");
+            productName = productName.substring(0, 255);
+        }
+
+        String currencySymbol = getCurrencySymbol(scanner);
+        System.out.print("Enter the price (" + currencySymbol + "): ");
+        double price = scanner.nextDouble();
+        scanner.nextLine(); // Consume leftover newline
+
+        String sizeUnit = getSizeUnit(scanner);
+        System.out.print("Enter size in " + sizeUnit + ": ");
+        double size = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.print("Enter URL (leave blank if not applicable): ");
+        String url = scanner.nextLine();
+
+        System.out.print("Enter expiration date (YYYY-MM-DD, leave blank if not applicable): ");
+        String expirationDateInput = scanner.nextLine();
+        java.sql.Date expirationDate = null;
+        if (!expirationDateInput.isEmpty()) {
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date parsedDate = dateFormat.parse(expirationDateInput);
+                expirationDate = new java.sql.Date(parsedDate.getTime());
+            } catch (ParseException e) {
+                System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+                return;
+            }
+        }
+
+        System.out.print("Enter concern name: ");
+        String concernName = scanner.nextLine();
+        addConcernDetails(scanner, concernName);
+
+        System.out.print("Enter type (skincare, makeup, haircare, fragrances, bath&body, tools&brushes): ");
+        List<String> types = List.of(new String[]{"skincare", "makeup", "haircare", "fragrances", "bath&body", "tools&brushes"});
+        String typeName = scanner.nextLine();
+        while (!types.contains(typeName.toLowerCase())) {
+            System.out.print("Please enter valid type: ");
+            typeName = scanner.nextLine();
+        }
+
+        System.out.print("Enter brand name: ");
+        String brandName = scanner.nextLine();
+        addBrandDetails(scanner, brandName);
+
+        // Add SQL insertion logic for product
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO product (product_name, price, size, url, expiration_date, concern_name, type_name, brand_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+
+            statement.setString(1, productName);
+            statement.setDouble(2, price);
+            statement.setDouble(3, size);
+            statement.setString(4, url);
+            statement.setDate(5, expirationDate);
+            statement.setString(6, concernName);
+            statement.setString(7, typeName);
+            statement.setString(8, brandName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Product added successfully!");
+            } else {
+                System.out.println("No product was added.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Ask if the user wants to add ingredient details
+        System.out.print("Do you want to add ingredient details? (yes/no): ");
+        if (scanner.nextLine().equalsIgnoreCase("yes")) {
+            addIngredientDetails(scanner, productName);
+        }
+
+        // Ask if the user wants to add package details
+        System.out.print("Do you want to add package details? (yes/no): ");
+        if (scanner.nextLine().equalsIgnoreCase("yes")) {
+            addPackageDetails(scanner, productName);
+        }
+
+        System.out.print("Would you like to view the complete product list? (yes/no): ");
+        if (scanner.nextLine().equalsIgnoreCase("yes")) {
+            viewAllProducts(scanner);
+        }
+    }
+
+    private static String getCurrencySymbol(Scanner scanner) {
+        System.out.println("Select the currency:");
+        System.out.println("1. Euro (€)");
+        System.out.println("2. US Dollars ($)");
+        System.out.println("3. Canadian Dollars (C$)");
+        System.out.println("4. British Pounds (£)");
+        System.out.println("5. Japanese Yen (JPY¥)");
+        System.out.println("6. Chinese Yuan (CN¥)");
+        System.out.println("7. Hong Kong Dollars (HK$)");
+        System.out.println("8. Korean Won (₩)");
+        System.out.println("9. Peruvian Sols (S/.)");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1 -> {
+                return "€";
+            }
+            case 2 -> {
+                return "$";
+            }
+            case 3 -> {
+                return "C$";
+            }
+            case 4 -> {
+                return "£";
+            }
+            case 5 -> {
+                return "JPY¥";
+            }
+            case 6 -> {
+                return "CN¥";
+            }
+            case 7 -> {
+                return "HK$";
+            }
+            case 8 -> {
+                return "₩";
+            }
+            case 9 -> {
+                return "S/.";
+            }
+            default -> {
+                System.out.println("Invalid choice, defaulting to US Dollars ($)");
+                return "$";
+            }
+        }
+    }
+
+    private static String getSizeUnit(Scanner scanner) {
+        System.out.println("Select the size unit:");
+        System.out.println("1. Milliliters (ml)");
+        System.out.println("2. Liters (l)");
+        System.out.println("3. Ounces (oz)");
+        System.out.println("4. Kilograms (kg)");
+        System.out.println("5. Grams (g)");
+        System.out.println("6. Other");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1 -> {
+                return "ml";
+            }
+            case 2 -> {
+                return "l";
+            }
+            case 3 -> {
+                return "oz";
+            }
+            case 4 -> {
+                return "kg";
+            }
+            case 5 -> {
+                return "g";
+            }
+            case 6 -> {
+                System.out.print("Enter the size unit: ");
+                return scanner.nextLine().trim();
+            }
+            default -> {
+                System.out.println("Invalid choice, defaulting to grams (g)");
+                return "g";
+            }
+        }
+    }
+
+
+
+    private static void addIngredientDetails(Scanner scanner, String productName) {
+        System.out.print("Enter ingredient name (leave blank to skip): ");
+        String ingredientName = scanner.nextLine();
+
+        // If ingredient name is empty, skip adding ingredient details
+        if (ingredientName.isEmpty()) {
+            System.out.println("Skipping ingredient addition.");
+            return;
+        }
+
+        boolean isCrueltyFree = getBooleanInput(scanner, "Is the ingredient cruelty-free? (yes/no): ");
+        boolean isCleanBeauty = getBooleanInput(scanner, "Is it clean beauty? (yes/no): ");
+        boolean isFragranceFree = getBooleanInput(scanner, "Is it fragrance-free? (yes/no): ");
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO ingredient " +
+                     "(ingredient_name, is_cruelty_free, is_clean_beauty, is_fragrance_free, product_name) " +
+                     "VALUES (?, ?, ?, ?, ?)")) {
+
+            statement.setString(1, ingredientName);
+            statement.setBoolean(2, isCrueltyFree);
+            statement.setBoolean(3, isCleanBeauty);
+            statement.setBoolean(4, isFragranceFree);
+            statement.setString(5, productName);
+
+            statement.executeUpdate();
+            System.out.println("Ingredient details added successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static boolean getBooleanInput(Scanner scanner, String prompt) {
+        String input;
+        while (true) {
+            System.out.print(prompt);
+            input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("yes")) {
+                return true;
+            } else if (input.equals("no")) {
+                return false;
+            } else {
+                System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+            }
+        }
+    }
+
+
+    private static void addPackageDetails(Scanner scanner, String productName) {
+        System.out.print("Enter package color (leave blank to skip): ");
+        String color = scanner.nextLine();
+
+        System.out.print("Enter package material (leave blank to skip): ");
+        String material = scanner.nextLine();
+
+        System.out.print("Enter package weight (leave blank for default): ");
+        String weightInput = scanner.nextLine();
+        double weight = weightInput.isEmpty() ? 0.0 : Double.parseDouble(weightInput);
+
+        boolean refillAvailable = getBooleanInput(scanner, "Is refill available? (yes/no): ");
+        boolean sustainablePackage = getBooleanInput(scanner, "Is the package sustainable? (yes/no): ");
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO package " +
+                     "(product_name, color, material, weight, refill_available, sustainable_package) " +
+                     "VALUES (?, ?, ?, ?, ?, ?)")) {
+
+            statement.setString(1, productName);
+            if (color.isEmpty()) statement.setNull(2, java.sql.Types.VARCHAR); else statement.setString(2, color);
+            if (material.isEmpty()) statement.setNull(3, java.sql.Types.VARCHAR); else statement.setString(3, material);
+            statement.setDouble(4, weight);
+            statement.setBoolean(5, refillAvailable);
+            statement.setBoolean(6, sustainablePackage);
+
+            statement.executeUpdate();
+            System.out.println("Package details added successfully.");
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to add package details.");
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input for weight. Please enter a number.");
+        }
+    }
+
+
+    private static void addBrandDetails(Scanner scanner, String brandName) {
+        System.out.print("Enter brand description (leave blank if not applicable): ");
+        String description = scanner.nextLine();
+
+        System.out.print("Enter country of origin (leave blank if not applicable): ");
+        String country = scanner.nextLine();
+
+        System.out.print("Enter founding year (leave blank if not applicable): ");
+        String foundingYearInput = scanner.nextLine();
+        Integer foundingYear = foundingYearInput.isEmpty() ? null : Integer.parseInt(foundingYearInput);
+
+        System.out.print("Enter email (leave blank if not applicable): ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter telephone number (leave blank if not applicable): ");
+        String tel = scanner.nextLine();
+
+        System.out.print("Enter founder name (leave blank if not applicable): ");
+        String founder = scanner.nextLine();
+
+        // Insert or update brand details in the database
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO brand " +
+                     "(brand_name, b_description, country_of_origin, founding_year, email, tel, founder) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE b_description = ?, country_of_origin = ?, founding_year = ?, email = ?, tel = ?, founder = ?")) {
+
+            statement.setString(1, brandName);
+            setStringOrNull(statement, 2, description);
+            setStringOrNull(statement, 3, country);
+            if (foundingYear != null) {
+                statement.setInt(4, foundingYear);
+            } else {
+                statement.setNull(4, java.sql.Types.INTEGER);
+            }
+            setStringOrNull(statement, 5, email);
+            setStringOrNull(statement, 6, tel);
+            setStringOrNull(statement, 7, founder);
+            // For the ON DUPLICATE KEY UPDATE part
+            setStringOrNull(statement, 8, description);
+            setStringOrNull(statement, 9, country);
+            if (foundingYear != null) {
+                statement.setInt(10, foundingYear);
+            } else {
+                statement.setNull(10, java.sql.Types.INTEGER);
+            }
+            setStringOrNull(statement, 11, email);
+            setStringOrNull(statement, 12, tel);
+            setStringOrNull(statement, 13, founder);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input for founding year. Please enter a valid number.");
+        }
+    }
+
+    private static void setStringOrNull(PreparedStatement statement, int parameterIndex, String value) throws SQLException {
+        if (value.isEmpty()) {
+            statement.setNull(parameterIndex, java.sql.Types.VARCHAR);
+        } else {
+            statement.setString(parameterIndex, value);
+        }
+    }
+
+
+
+    private static void addConcernDetails(Scanner scanner, String concernName) {
+        System.out.print("Enter concern description (leave blank if not applicable): ");
+        String description = scanner.nextLine();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO concern (concern_name, c_description) VALUES (?, ?) ON DUPLICATE KEY UPDATE c_description = ?")) {
+
+            statement.setString(1, concernName);
+            if (description.isEmpty()) {
+                statement.setNull(2, java.sql.Types.VARCHAR); // Set to NULL if the description is empty
+            } else {
+                statement.setString(2, description);
+            }
+            statement.setString(3, description);
+
+            statement.executeUpdate();
+            System.out.println("Concern details added successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    // optional
+    private static void addTypeDetails(Scanner scanner, String typeName) {
+        System.out.print("Enter type description: ");
+        String description = scanner.nextLine();
+
+        // Insert or update type details in the database
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO type (type_name) VALUES (?) ON DUPLICATE KEY UPDATE type_name = ?")) {
+
+            statement.setString(1, typeName);
+            statement.setString(2, typeName);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void viewAllProducts(Scanner scanner) {
+        String query = "SELECT product_name FROM product ORDER BY product_name";
+        boolean hasProducts = false;
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            int productNumber = 1;
+            while (resultSet.next()) {
+                hasProducts = true;
+                String name = resultSet.getString("product_name");
+                System.out.println(productNumber + ". " + name);
+                productNumber++;
+            }
+
+            if (!hasProducts) {
+                System.out.println("There are no products saved in the collection.");
+                System.out.print("Do you want to add a product? (yes/no): ");
+                String addProductChoice = scanner.nextLine().toLowerCase();
+                if (addProductChoice.equals("yes")) {
+                    addNewProduct(scanner);
+                } else {
+                    System.out.println("Exiting...");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // After viewProduct, users can select product directly fron the list or choose to filter by other keywords
+    private static void viewAndChooseProducts(Scanner scanner) {
+        viewAllProducts(scanner); // Displays all products
+
+        System.out.println("Would you like to:");
+        System.out.println("1. Select a product by name");
+        System.out.println("2. Filter products by keyword");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1:
+                selectProductDirectly();
+                break;
+            case 2:
+                filterProductsByKeyword();
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                break;
+        }
+    }
+
+    // view product list -> select a product directly
+
+    private static void selectProductDirectly() {
+        System.out.print("Enter the product name to select: ");
+        String productName = scanner.nextLine();
+
+        String query = "SELECT product_name, price, size, url, expiration_date, concern_name, type_name, brand_name " +
+                "FROM product WHERE product_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, productName);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Extracting product details
+                    double price = resultSet.getDouble("price");
+                    int size = resultSet.getInt("size");
+                    String url = resultSet.getString("url");
+                    Date expirationDate = resultSet.getDate("expiration_date");
+                    String concernName = resultSet.getString("concern_name");
+                    String typeName = resultSet.getString("type_name");
+                    String brandName = resultSet.getString("brand_name");
+
+                    // Display the product information
+                    System.out.println("Product Name: " + productName);
+                    System.out.println("Price: " + price);
+                    System.out.println("Size: " + size);
+                    System.out.println("URL: " + url);
+                    System.out.println("Expiration Date: " + expirationDate);
+                    System.out.println("Concern: " + concernName);
+                    System.out.println("Type: " + typeName);
+                    System.out.println("Brand: " + brandName);
+                } else {
+                    System.out.println("Product not found.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // filter products by any keyword
+    private static void filterProductsByKeyword() {
+        List<String> filteredProductNames = new ArrayList<>();
+        System.out.print("Enter keyword to search for: ");
+        String keyword = scanner.nextLine().trim();
+        String searchKeyword = "%" + keyword + "%";
+
+        String query = "SELECT DISTINCT product.product_name, product.price, product.size, product.url, product.expiration_date, " +
+                "concern.concern_name, type.type_name, brand.brand_name, function_table.f_name, brand.country_of_origin " +
+                "FROM product " +
+                "LEFT JOIN concern ON product.concern_name = concern.concern_name " +
+                "LEFT JOIN type ON product.type_name = type.type_name " +
+                "LEFT JOIN brand ON product.brand_name = brand.brand_name " +
+                "LEFT JOIN function_table ON product.type_name = function_table.type_name " +
+                "LEFT JOIN ingredient ON product.product_name = ingredient.product_name " +
+                "LEFT JOIN package ON product.product_name = package.product_name " +
+                "WHERE product.product_name LIKE ? OR type.type_name LIKE ? OR brand.brand_name LIKE ? " +
+                "OR concern.concern_name LIKE ? OR ingredient.ingredient_name LIKE ? " +
+                "OR package.color LIKE ? OR package.material LIKE ? " +
+                "OR function_table.f_name LIKE ? OR brand.country_of_origin LIKE ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            for (int i = 1; i <= 9; i++) {
+                statement.setString(i, searchKeyword);
+            }
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                boolean isResultFound = false;
+                while (resultSet.next()) {
+                    isResultFound = true;
+                    String name = resultSet.getString("product_name");
+                    filteredProductNames.add(name);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (!filteredProductNames.isEmpty()) {
+            System.out.println("Would you like to select a product from these results? (yes/no): ");
+            if (scanner.nextLine().equalsIgnoreCase("yes")) {
+                selectAndViewProduct(filteredProductNames);
+            }
+        } else {
+            System.out.println("No products found with the specified keyword.");
+        }
+    }
+
+
+    // prompt the user to ask for selecting a product
+    private static void selectAndViewProduct(List<String> productNames) {
+        System.out.println("Select a product by typing its name:");
+        while (true) {
+            String selectedProductName = scanner.nextLine();
+
+            if (selectedProductName.equalsIgnoreCase("exit")) {
+                System.out.println("Exiting product selection.");
+                break;
+            }
+
+            if (productNames.contains(selectedProductName)) {
+                System.out.println("You have selected: " + selectedProductName);
+                viewSelectedProduct(selectedProductName);  // View the selected product's details
+                break;
+            } else {
+                System.out.println("Product not found in the list. Please try again or type 'exit' to go back.");
+            }
+        }
+    }
+
+
+    private static void viewSelectedProduct(String productName) {
+        String query = "SELECT product.product_name, product.price, product.size, product.url, product.expiration_date, " +
+                "concern.concern_name, type.type_name, brand.brand_name " +
+                "FROM product " +
+                "LEFT JOIN concern ON product.concern_name = concern.concern_name " +
+                "LEFT JOIN type ON product.type_name = type.type_name " +
+                "LEFT JOIN brand ON product.brand_name = brand.brand_name " +
+                "WHERE product.product_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, productName);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Assuming these are the details you want to display
+                    double price = resultSet.getDouble("price");
+                    int size = resultSet.getInt("size");
+                    String url = resultSet.getString("url");
+                    Date expirationDate = resultSet.getDate("expiration_date");
+                    String concernName = resultSet.getString("concern_name");
+                    String typeName = resultSet.getString("type_name");
+                    String brandName = resultSet.getString("brand_name");
+
+                    // Display the product details
+                    System.out.println("Product Name: " + productName + ", Price: " + price + ", Size: " + size +
+                            ", URL: " + url + ", Expiration Date: " + expirationDate +
+                            ", Concern: " + concernName + ", Type: " + typeName +
+                            ", Brand: " + brandName);
+                    System.out.println("\nOptions for '" + productName + "':");
+                    System.out.println("1. Edit this product");
+                    System.out.println("2. Delete this product");
+                    System.out.println("3. Go back");
+                    System.out.print("Enter your choice: ");
+                    int actionChoice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+
+                    switch (actionChoice) {
+                        case 1:
+                            editMenu(); // Call editProduct method with productName
+                            break;
+                        case 2:
+                            deleteProduct(productName); // Call deleteProduct method with productName
+                            break;
+                        case 3:
+                            return; // Go back without any action
+                        default:
+                            System.out.println("Invalid choice. Please try again.");
+                    }
+                } else {
+                    System.out.println("Product not found.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static void deleteProduct(String productName) {
+        String query = "DELETE FROM product WHERE product_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, productName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Product '" + productName + "' has been deleted.");
+            } else {
+                System.out.println("Product not found or could not be deleted.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to delete the product.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void editMenu() {
+        while (true) {
+            System.out.println("\nEdit Menu:");
+            System.out.println("1. Edit Product");
+            System.out.println("2. Edit Brand");
+            System.out.println("3. Edit Type");
+            System.out.println("4. Edit Concern");
+            System.out.println("5. Edit Function");
+            System.out.println("6. Edit Ingredient");
+            System.out.println("7. Edit Package");
+            System.out.println("8. Go Back");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    String productName = scanner.nextLine();
+                    editProduct(productName);
+                    break;
+                case 2:
+                    editBrand(); // Implement this method
+                    break;
+                case 3:
+                    editType(); // Implement this method
+                    break;
+                case 4:
+                    editConcern(); // Implement this method
+                    break;
+                case 5:
+                    editFunction(); // Implement this method
+                    break;
+                case 6:
+                    editIngredient(); // Implement this method
+                    break;
+                case 7:
+                    editPackage(); // Implement this method
+                    break;
+                case 8:
+                    return; // Exit the edit menu
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+
+
+    public static void editProduct(String productName) {
+        // Check if the product exists in the database before proceeding
+        if (!isProductExist(productName)) {
+            System.out.println("Product '" + productName + "' does not exist.");
+            return;
+        }
+
+        System.out.println("Which field would you like to update for '" + productName + "'?");
+        System.out.println("Options: price, size, url, expiration_date, concern_name, type_name, brand_name");
+        System.out.print("Enter the field to update: ");
+        String field = scanner.nextLine().trim();
+
+        // Verify if the chosen field is valid
+        List<String> validFields = Arrays.asList("price", "size", "url", "expiration_date", "concern_name", "type_name", "brand_name");
+        if (!validFields.contains(field)) {
+            System.out.println("Invalid field selected.");
+            return;
+        }
+
+        System.out.println("Enter the new value for " + field + " (leave blank to delete):");
+        String newValue = scanner.nextLine().trim();
+
+        // Confirm before deleting the field
+        if (newValue.isEmpty() && (field.equals("url") || field.equals("expiration_date") || field.equals("size"))) {
+            System.out.print("Are you sure you want to delete the " + field + "? (yes/no): ");
+            String confirmation = scanner.nextLine().trim().toLowerCase();
+            if (!confirmation.equals("yes")) {
+                System.out.println(field + " deletion cancelled.");
+                return;
+            }
+        }
+
+        String query = "UPDATE product SET " + field + " = ? WHERE product_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Set the appropriate value type based on the field
+            switch (field) {
+                case "price" -> statement.setDouble(1, Double.parseDouble(newValue));
+                case "size" -> statement.setInt(1, Integer.parseInt(newValue));
+                case "expiration_date" -> {
+                    if (!newValue.isEmpty()) {
+                        statement.setDate(1, Date.valueOf(newValue));
+                    } else {
+                        statement.setNull(1, Types.DATE);
+                    }
+                }
+                default -> {
+                    if (!newValue.isEmpty()) {
+                        statement.setString(1, newValue);
+                    } else {
+                        statement.setNull(1, Types.VARCHAR);
+                    }
+                }
+            }
+            statement.setString(2, productName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Product '" + productName + "' has been updated.");
+            } else {
+                System.out.println("Product not found or could not be updated.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to update the product.");
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input for the numerical field.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD.");
+        }
+    }
+
+    private static boolean isProductExist(String productName) {
+        String query = "SELECT COUNT(*) FROM product WHERE product_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, productName);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while checking the product existence.");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static void editType() {
+        System.out.print("Enter the type to update (e.g., skincare, makeup): ");
+        String typeName = scanner.nextLine().trim();
+
+        System.out.println("Enter the new description for the type '" + typeName + "':");
+        String newDescription = scanner.nextLine().trim();
+
+        String query = "UPDATE type SET type_description = ? WHERE type_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, newDescription);
+            statement.setString(2, typeName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Type '" + typeName + "' has been updated.");
+            } else {
+                System.out.println("Type not found or could not be updated.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to update the type.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void editBrand() {
+        System.out.print("Enter the brand name to update: ");
+        String brandName = scanner.nextLine().trim();
+
+        System.out.println("Which field would you like to update for '" + brandName + "'?");
+        System.out.println("Options: b_description, country_of_origin, founding_year, email, tel, founder");
+        System.out.print("Enter the field to update: ");
+        String field = scanner.nextLine().trim();
+
+        List<String> validFields = Arrays.asList("b_description", "country_of_origin", "founding_year", "email", "tel", "founder");
+        if (!validFields.contains(field)) {
+            System.out.println("Invalid field selected.");
+            return;
+        }
+
+        System.out.println("Enter the new value for " + field + " (leave blank to remove):");
+        String newValue = scanner.nextLine().trim();
+
+        // Confirmation for empty values
+        if (newValue.isEmpty()) {
+            System.out.println("Are you sure you want to remove the value for " + field + "? (yes/no):");
+            String confirmation = scanner.nextLine().trim().toLowerCase();
+            if (!confirmation.equals("yes")) {
+                System.out.println("Update cancelled.");
+                return;
+            }
+        }
+
+        String query = "UPDATE brand SET " + field + " = ? WHERE brand_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            if (field.equals("founding_year") && !newValue.isEmpty()) {
+                statement.setInt(1, Integer.parseInt(newValue));
+            } else if (newValue.isEmpty()) {
+                statement.setNull(1, java.sql.Types.VARCHAR); // Set to NULL if the field is emptied
+            } else {
+                statement.setString(1, newValue);
+            }
+            statement.setString(2, brandName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Brand '" + brandName + "' has been successfully updated.");
+            } else {
+                System.out.println("Brand not found or could not be updated.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to update the brand.");
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input for a numerical field.");
+        }
+    }
+
+
+    private static void editConcern() {
+        System.out.print("Enter the concern to update: ");
+        String concernName = scanner.nextLine().trim();
+
+        System.out.println("Enter the new description for the concern '" + concernName + "' (leave blank to delete the description):");
+        String newDescription = scanner.nextLine().trim();
+
+        if (newDescription.isEmpty()) {
+            System.out.println("Are you sure you want to delete the description for this concern? (yes/no):");
+            String confirmation = scanner.nextLine().trim();
+            if (!confirmation.equalsIgnoreCase("yes")) {
+                System.out.println("Description update canceled.");
+                return;
+            }
+        }
+
+        String query = "UPDATE concern SET c_description = ? WHERE concern_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            if (newDescription.isEmpty()) {
+                statement.setNull(1, java.sql.Types.VARCHAR);
+            } else {
+                statement.setString(1, newDescription);
+            }
+            statement.setString(2, concernName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Concern '" + concernName + "' has been updated.");
+            } else {
+                System.out.println("Concern not found or could not be updated.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to update the concern.");
+            e.printStackTrace();
+        }
+    }
+
+
+    private static void editFunction() {
+        System.out.print("Enter the function name to update: ");
+        String functionName = scanner.nextLine().trim();
+
+        System.out.print("Enter the new name for the function: ");
+        String newFunctionName = scanner.nextLine().trim();
+
+        System.out.print("Enter the new description for the function (leave blank to delete): ");
+        String newDescription = scanner.nextLine().trim();
+
+        // Confirm before deleting the description
+        if (newDescription.isEmpty()) {
+            System.out.print("Are you sure you want to delete the description? (yes/no): ");
+            String confirmation = scanner.nextLine().trim();
+            if (!confirmation.equalsIgnoreCase("yes")) {
+                System.out.println("Update cancelled.");
+                return;
+            }
+        }
+
+        String query = "UPDATE function_table SET f_name = ?, f_description = ? WHERE f_name = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, newFunctionName);
+            if (newDescription.isEmpty()) {
+                statement.setNull(2, java.sql.Types.VARCHAR); // Set to NULL if the description is empty
+            } else {
+                statement.setString(2, newDescription);
+            }
+            statement.setString(3, functionName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Function '" + functionName + "' has been updated to '" + newFunctionName + "'.");
+                if (newDescription.isEmpty()) {
+                    System.out.println("Description deleted successfully.");
+                }
+            } else {
+                System.out.println("Function not found or could not be updated.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to update the function.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void editIngredient() {
+        System.out.print("Enter the ingredient name to update: ");
+        String ingredientName = scanner.nextLine().trim();
+
+        System.out.println("Which field would you like to update for '" + ingredientName + "'?");
+        System.out.println("Options: ingredient_name, is_cruelty_free, is_clean_beauty, is_fragrance_free");
+        System.out.print("Enter the field to update: ");
+        String field = scanner.nextLine().trim();
+
+        List<String> validFields = Arrays.asList("ingredient_name", "is_cruelty_free", "is_clean_beauty", "is_fragrance_free");
+        if (!validFields.contains(field)) {
+            System.out.println("Invalid field selected.");
+            return;
+        }
+
+        System.out.print("Enter the new value for " + field + " (leave blank to delete, true/false for booleans): ");
+        String newValue = scanner.nextLine().trim();
+
+        if (newValue.isEmpty()) {
+            System.out.print("Are you sure you want to delete this field? (yes/no): ");
+            if (!scanner.nextLine().trim().equalsIgnoreCase("yes")) {
+                System.out.println("Update cancelled.");
+                return;
+            }
+        }
+
+        String query = "UPDATE ingredient SET " + field + " = ? WHERE ingredient_name = ?";
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            if (field.equals("ingredient_name") || field.equals("is_cruelty_free") || field.equals("is_clean_beauty") || field.equals("is_fragrance_free")) {
+                if (newValue.isEmpty()) {
+                    statement.setNull(1, java.sql.Types.VARCHAR);  // Set to NULL if the value is empty
+                } else {
+                    statement.setBoolean(1, Boolean.parseBoolean(newValue));
+                }
+            }
+            statement.setString(2, ingredientName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Ingredient '" + ingredientName + "' has been updated.");
+            } else {
+                System.out.println("Ingredient not found or could not be updated.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to update the ingredient.");
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input for boolean field.");
+        }
+    }
+
+
+    private static void editPackage() {
+        System.out.print("Enter the product name to update its package: ");
+        String productName = scanner.nextLine().trim();
+
+        System.out.println("Which field would you like to update for the package of '" + productName + "'?");
+        System.out.println("Options: color, material, weight, refill_available, sustainable_package");
+        System.out.print("Enter the field to update: ");
+        String field = scanner.nextLine().trim();
+
+        List<String> validFields = Arrays.asList("color", "material", "weight", "refill_available", "sustainable_package");
+        if (!validFields.contains(field)) {
+            System.out.println("Invalid field selected.");
+            return;
+        }
+
+        System.out.println("Enter the new value for " + field + " (leave blank to clear):");
+        String newValue = scanner.nextLine().trim();
+
+        // Confirmation for clearing color or material fields
+        if (newValue.isEmpty() && (field.equals("color") || field.equals("material"))) {
+            System.out.print("Are you sure you want to clear the " + field + "? (yes/no): ");
+            if (!scanner.nextLine().trim().equalsIgnoreCase("yes")) {
+                System.out.println("Update cancelled.");
+                return;
+            }
+        }
+
+        // Build and execute SQL query
+        String query = "UPDATE package SET " + field + " = ? WHERE product_name = ?";
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            if (field.equals("weight")) {
+                if (!newValue.isEmpty()) {
+                    statement.setDouble(1, Double.parseDouble(newValue));
+                } else {
+                    statement.setNull(1, java.sql.Types.DOUBLE);
+                }
+            } else if (field.equals("refill_available") || field.equals("sustainable_package")) {
+                if (!newValue.isEmpty()) {
+                    boolean booleanValue = "yes".equalsIgnoreCase(newValue);
+                    statement.setBoolean(1, booleanValue);
+                } else {
+                    statement.setBoolean(1, false); // Setting default to false when cleared
+                }
+            } else {
+                if (!newValue.isEmpty()) {
+                    statement.setString(1, newValue);
+                } else {
+                    statement.setNull(1, java.sql.Types.VARCHAR);
+                }
+            }
+            statement.setString(2, productName);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Package details for '" + productName + "' have been updated.");
+            } else {
+                System.out.println("Package not found or could not be updated.");
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while trying to update the package.");
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input for the weight field.");
+        }
+    }
+
+
+}
