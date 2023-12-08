@@ -55,9 +55,27 @@ END //
 DELIMITER ;
 
 -- add package 
+DELIMITER //
+
+CREATE PROCEDURE AddPackageDetails(
+    IN p_productName VARCHAR(255),
+    IN p_color VARCHAR(255),
+    IN p_material VARCHAR(255),
+    IN p_weight DECIMAL(10,2),
+    IN p_refillAvailable BOOLEAN,
+    IN p_sustainablePackage BOOLEAN
+)
+BEGIN
+    INSERT INTO package (product_name, color, material, weight, refill_available, sustainable_package)
+    VALUES (p_productName, p_color, p_material, p_weight, p_refillAvailable, p_sustainablePackage);
+END //
+
+DELIMITER ;
+
+
 
 -- add brand
-DELIMITER $$
+DELIMITER //
 
 CREATE PROCEDURE AddOrUpdateBrand(
     IN p_brand_name VARCHAR(30),
@@ -82,9 +100,10 @@ BEGIN
         INSERT INTO brand (brand_name, b_description, country_of_origin, founding_year, email, tel, founder)
         VALUES (p_brand_name, p_description, p_country, p_founding_year, p_email, p_tel, p_founder);
     END IF;
-END $$
+END //
 
 DELIMITER ;
+
 
 
 -- edit brand
@@ -254,20 +273,20 @@ BEGIN
             PREPARE stmt FROM @query;
 
             -- Set the appropriate value type based on the field
-            CASE fieldToUpdate
-                WHEN 'price' THEN
-                    SET @newValue = CAST(newValue AS DECIMAL(10, 2));
-                WHEN 'size' THEN
-                    SET @newValue = CAST(newValue AS INT);
-                WHEN 'expiration_date' THEN
-                    IF newValue = '' THEN
-                        SET @newValue = NULL;
-                    ELSE
-                        SET @newValue = STR_TO_DATE(newValue, '%Y-%m-%d');
-                    END IF;
-                ELSE
-                    SET @newValue = newValue;
-            END CASE;
+			CASE fieldToUpdate
+				WHEN 'price' THEN
+					SET @newValue = CAST(newValue AS DECIMAL(10, 2));
+				WHEN 'size' THEN
+					SET @newValue = CAST(newValue AS UNSIGNED); -- Changed from INT to UNSIGNED
+				WHEN 'expiration_date' THEN
+					IF newValue = '' THEN
+						SET @newValue = NULL;
+					ELSE
+						SET @newValue = STR_TO_DATE(newValue, '%Y-%m-%d');
+					END IF;
+				ELSE
+					SET @newValue = newValue;
+			END CASE;
 
             -- Execute the query
             SET @productName = productName;
@@ -323,7 +342,11 @@ DELIMITER ;
 -- edit ingredient 
 DELIMITER //
 
-CREATE PROCEDURE edit_ingredient(IN ingredient_name VARCHAR(50), IN update_field VARCHAR(30), IN new_value VARCHAR(50))
+CREATE PROCEDURE edit_ingredient(
+    IN ingredient_name VARCHAR(50), 
+    IN update_field VARCHAR(30), 
+    IN new_value VARCHAR(50)
+)
 BEGIN
     DECLARE field_type VARCHAR(10);
 
@@ -337,26 +360,30 @@ BEGIN
     END CASE;
 
     -- If field type is invalid, exit the procedure
-    IF field_type = 'invalid' THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid field selected';
-        LEAVE;
-    END IF;
+		IF field_type = 'invalid' THEN
+			SIGNAL SQLSTATE '45000' 
+			SET MESSAGE_TEXT = 'An invalid field has been selected.';
+		END IF;
+
 
     -- Update logic
     SET @query = CONCAT('UPDATE ingredient SET ', update_field, ' = ? WHERE ingredient_name = ?');
     PREPARE stmt FROM @query;
 
+    -- Assign values to user-defined variables
+    SET @new_value_param = new_value;
+    SET @ingredient_name_param = ingredient_name;
+
     -- Set value based on field type
     IF field_type = 'boolean' THEN
         SET @new_value_bool = (new_value = 'true');
-        EXECUTE stmt USING @new_value_bool, ingredient_name;
+        EXECUTE stmt USING @new_value_bool, @ingredient_name_param;
     ELSE
-        EXECUTE stmt USING new_value, ingredient_name;
+        EXECUTE stmt USING @new_value_param, @ingredient_name_param;
     END IF;
 
     DEALLOCATE PREPARE stmt;
-END;
-//
+END //
 
 DELIMITER ;
 
@@ -388,9 +415,3 @@ BEGIN
 END$$
 
 DELIMITER ;
-
-
-
-
-
-

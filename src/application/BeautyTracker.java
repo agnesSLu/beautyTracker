@@ -579,7 +579,6 @@ public class BeautyTracker {
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, productName);
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     // Extracting product details
@@ -600,6 +599,27 @@ public class BeautyTracker {
                     System.out.println("Concern: " + concernName);
                     System.out.println("Type: " + typeName);
                     System.out.println("Brand: " + brandName);
+
+                    System.out.println("\nOptions for " + productName + ":");
+                    System.out.println("1. Edit Product");
+                    System.out.println("2. Delete Product");
+                    System.out.println("3. Go Back");
+                    System.out.print("Enter your choice: ");
+                    int choice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+
+                    switch (choice) {
+                        case 1:
+                            editMenu(); // Call edit menu
+                            break;
+                        case 2:
+                            deleteProduct(productName); // Call method to delete the product
+                            break;
+                        case 3:
+                            return; // Go back
+                        default:
+                            System.out.println("Invalid choice. Please try again.");
+                    }
                 } else {
                     System.out.println("Product not found.");
                 }
