@@ -1,13 +1,20 @@
 ***REMOVED***
 
-import security.SecureCredentialsStorage;
-import javax.crypto.SecretKey;
 ***REMOVED***
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+
+***REMOVED***
+
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -16,18 +23,13 @@ public class Main {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-
-        // Main menu
 ***REMOVED***
-            System.out.println("\nChoose an option:");
 ***REMOVED***
-            System.out.println("2. Exit");
 ***REMOVED***
 
-            int mainChoice = scanner.nextInt();
-    ***REMOVED***
+***REMOVED***
+***REMOVED***
 
-            switch (mainChoice) {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -35,10 +37,16 @@ public class Main {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-                    System.out.println("Invalid choice. Please enter 1 or 2.");
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
 
 ***REMOVED***
 ***REMOVED***
@@ -100,11 +108,12 @@ public class Main {
 
         System.out.print("Enter type (skincare, makeup, etc.): ");
 ***REMOVED***
-        // addTypeDetails(scanner, typeName); // Optional, based on whether you need to modify ENUM values
+
 
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+
 
 ***REMOVED***
 ***REMOVED***
@@ -143,23 +152,23 @@ public class Main {
 
 ***REMOVED***
 ***REMOVED***
-            viewAllProducts();  // Method to display all products
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
 
 
 ***REMOVED***
-        System.out.print("Enter ingredient name: ");
+***REMOVED***
 ***REMOVED***
 
-        System.out.print("Is the ingredient cruelty-free? (true/false): ");
-        boolean isCrueltyFree = scanner.nextBoolean();
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
 
-        System.out.print("Is it clean beauty? (true/false): ");
-        boolean isCleanBeauty = scanner.nextBoolean();
-
-        System.out.print("Is it fragrance-free? (true/false): ");
-        boolean isFragranceFree = scanner.nextBoolean();
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 
 ***REMOVED***
@@ -177,6 +186,22 @@ public class Main {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED*** else if (input.equals("no")) {
+***REMOVED***
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
 
 ***REMOVED***
         System.out.print("Enter package color: ");
@@ -212,8 +237,6 @@ public class Main {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-
-
 
 
 ***REMOVED***
@@ -279,6 +302,8 @@ public class Main {
 ***REMOVED***
 ***REMOVED***
 
+
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -296,58 +321,42 @@ public class Main {
 ***REMOVED***
 ***REMOVED***
 
-    private static void viewAllProducts() {
-        // SQL query to fetch and display all products
-        String query = "SELECT product_name, price, size, url, expiration_date FROM product";
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 
 ***REMOVED***
-                // Extract product details
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 
-                // Display product information
-                System.out.println("Name: " + name + ", Price: " + price + ", Size: " + size +
-                        ", URL: " + url + ", Expiration Date: " + expirationDate);
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED*** catch (SQLException e) {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 
-    private static void selectProduct(List<String> productNames) {
-***REMOVED***
-        String selectedProductName = scanner.nextLine();
 
-        if (productNames.contains(selectedProductName)) {
-            System.out.println("You have selected: " + selectedProductName);
-
-***REMOVED*** else {
-            System.out.println("Product not found in the list. Please try again.");
 ***REMOVED***
 ***REMOVED***
-
-
-
-
-
-
-
-
+***REMOVED***
 
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
+***REMOVED*** // Consume newline
 
-***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -362,7 +371,6 @@ public class Main {
 ***REMOVED***
 
 ***REMOVED***
-***REMOVED***
 
 ***REMOVED***
 ***REMOVED***
@@ -370,9 +378,15 @@ public class Main {
 
 ***REMOVED***
 ***REMOVED***
-    ***REMOVED***
+
 ***REMOVED***
-    ***REMOVED***
+***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
     ***REMOVED***
     ***REMOVED***
     ***REMOVED***
@@ -382,34 +396,78 @@ public class Main {
     ***REMOVED***
 
 ***REMOVED***
-
-***REMOVED***
-                    System.out.println("Name: " + name + ", Price: " + price + ", Size: " + size +
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+    ***REMOVED*** else {
 ***REMOVED***
     ***REMOVED***
 ***REMOVED***
 ***REMOVED*** catch (SQLException e) {
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
 
-        if (filteredProductNames.isEmpty()) {
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+    ***REMOVED***
+***REMOVED***
+    ***REMOVED***
+***REMOVED***
+                    // Additional code to display product details can be added here if needed
+    ***REMOVED***
+***REMOVED***
+***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+    ***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED*** else {
-            selectAndViewProduct(filteredProductNames);
-***REMOVED***
-***REMOVED***
-
-
-
-***REMOVED***
-***REMOVED***
-        if (productNames.isEmpty()) {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 
+
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -428,6 +486,7 @@ public class Main {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+
 
 ***REMOVED***
 ***REMOVED***
@@ -470,16 +529,16 @@ public class Main {
 
 
 ***REMOVED***
-
-        String deleteQuery = "DELETE FROM product WHERE product_name = ?";
 ***REMOVED***
-             PreparedStatement statement = connection.prepareStatement(deleteQuery)) {
 
 ***REMOVED***
 ***REMOVED***
 
 ***REMOVED***
-                System.out.println("Product deleted successfully.");
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
 ***REMOVED*** else {
 ***REMOVED***
 ***REMOVED***
@@ -487,27 +546,346 @@ public class Main {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-
-    private static void editProduct(String productName) {
-
-        System.out.println("Enter new price:");
-        double newPrice = scanner.nextDouble();
-***REMOVED*** // Consume the newline
-
-        String updateQuery = "UPDATE product SET price = ? WHERE product_name = ?";
-***REMOVED***
-             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
-
-            statement.setDouble(1, newPrice);
-***REMOVED***
 ***REMOVED***
 
 ***REMOVED***
-                System.out.println("Product updated successfully.");
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+                    editProduct(); // Implement this method
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED*** // Exit the edit menu
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+
+
+    private static void editProduct() {
+        System.out.print("Enter the name of the product to edit: ");
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+        System.out.println("Enter the new value for " + field + ":");
+***REMOVED***
+
+        // Building the SQL Update Query
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+            if (field.equals("price")) {
+                statement.setDouble(1, Double.parseDouble(newValue));
+***REMOVED*** else if (field.equals("size")) {
+***REMOVED***
+***REMOVED*** else if (field.equals("expiration_date")) {
+                statement.setDate(1, java.sql.Date.valueOf(newValue));
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
 ***REMOVED*** else {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (NumberFormatException e) {
+***REMOVED***
+***REMOVED*** catch (IllegalArgumentException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+    ***REMOVED***
+***REMOVED***
+***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+        System.out.println("Enter the new value for " + field + ":");
+***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+            // Handle special cases for data types
+            if (field.equals("founding_year")) {
+***REMOVED***
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+                System.out.println("Brand '" + brandName + "' has been updated.");
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (NumberFormatException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+        System.out.println("Enter the new description for the concern '" + concernName + "':");
+***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+        System.out.print("Enter the new description for the function: ");
+***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+            statement.setString(2, newDescription);
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+                System.out.println("Function '" + functionName + "' has been updated to '" + newFunctionName + "' with new description.");
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+        System.out.println("Options: is_cruelty_free, is_clean_beauty, is_fragrance_free");
+***REMOVED***
+***REMOVED***
+
+        List<String> validFields = Arrays.asList("is_cruelty_free", "is_clean_beauty", "is_fragrance_free");
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+        System.out.println("Enter the new value for " + field + " (true/false):");
+        boolean newValue = Boolean.parseBoolean(scanner.nextLine().trim());
+
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+            statement.setBoolean(1, newValue);
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+        System.out.println("Enter the new value for " + field + ":");
+***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+                statement.setDouble(1, Double.parseDouble(newValue));
+***REMOVED*** else if (field.equals("refill_available") || field.equals("sustainable_package")) {
+                statement.setBoolean(1, Boolean.parseBoolean(newValue));
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED*** else {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (SQLException e) {
+***REMOVED***
+***REMOVED***
+***REMOVED*** catch (NumberFormatException e) {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
