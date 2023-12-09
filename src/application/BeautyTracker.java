@@ -698,7 +698,7 @@ public class BeautyTracker {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    double price = resultSet.getDouble("price");
+                    String price = resultSet.getString("price");
                     String size = resultSet.getString("size"); // Assuming size is a String
                     String url = resultSet.getString("url");
                     Date expirationDate = resultSet.getDate("expiration_date");
