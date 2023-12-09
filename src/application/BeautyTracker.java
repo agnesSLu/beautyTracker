@@ -61,7 +61,7 @@ public class BeautyTracker {
                 productCount++;
                 String productName = resultSet.getString("product_name");
                 double price = resultSet.getDouble("price");
-                int size = resultSet.getInt("size");
+                int size = resultSet.getInt("price");
                 String url = resultSet.getString("url");
                 Date expirationDate = resultSet.getDate("expiration_date");
                 String concernName = resultSet.getString("concern_name");
@@ -895,7 +895,7 @@ public class BeautyTracker {
         }
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             CallableStatement statement = connection.prepareCall("{CALL EditBrandDetail(?, ?, ?)}")) {
+             CallableStatement statement = connection.prepareCall("{CALL UpdateBrandDetails(?, ?, ?)}")) {
 
             statement.setString(1, brandName);
             statement.setString(2, field);

@@ -105,22 +105,24 @@ END //
 DELIMITER ;
 
 
-
 -- edit brand
+
 DELIMITER //
 
-CREATE PROCEDURE EditBrandDetail(
-    IN p_brand_name VARCHAR(30),
-    IN p_field_name VARCHAR(30),
-    IN p_new_value VARCHAR(512)
+CREATE PROCEDURE UpdateBrandDetails(
+    IN p_brandName VARCHAR(255),
+    IN p_field VARCHAR(255),
+    IN p_value VARCHAR(255)
 )
 BEGIN
-    SET @sql = CONCAT('UPDATE brand SET ', p_field_name, ' = ? WHERE brand_name = ?');
-    PREPARE stmt FROM @sql;
-    SET @brand_name = p_brand_name;
-    SET @value = p_new_value;
-    EXECUTE stmt USING @value, @brand_name;
-    DEALLOCATE PREPARE stmt;
+    CASE
+        WHEN p_field = 'b_description' THEN
+            UPDATE brand SET b_description = p_value WHERE brand_name = p_brandName;
+        WHEN p_field = 'country_of_origin' THEN
+            UPDATE brand SET country_of_origin = p_value WHERE brand_name = p_brandName;
+        -- Add similar cases for other fields
+        -- ...
+    END CASE;
 END //
 
 DELIMITER ;

@@ -73,15 +73,15 @@ DROP TABLE IF EXISTS product;
 CREATE TABLE product (
     product_name VARCHAR(30) PRIMARY KEY NOT NULL,
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
-    size VARCHAR(10) CHECK (size > 0),
+    size VARCHAR(10),
     url VARCHAR(512),
     expiration_date DATE,
     concern_name VARCHAR(30) NOT NULL,
     type_name ENUM ('skincare', 'makeup', 'haircare', 'fragrances', 'bath&body', 'tools&brushes') NOT NULL,
     brand_name VARCHAR(30) NOT NULL,
-    FOREIGN KEY (concern_name) REFERENCES concern(concern_name) ON UPDATE RESTRICT,
-    FOREIGN KEY (type_name) REFERENCES type(type_name) ON UPDATE RESTRICT,
-    FOREIGN KEY (brand_name) REFERENCES brand(brand_name) ON UPDATE RESTRICT
+    FOREIGN KEY (concern_name) REFERENCES concern(concern_name) ON UPDATE CASCADE,
+    FOREIGN KEY (type_name) REFERENCES type(type_name) ON UPDATE CASCADE,
+    FOREIGN KEY (brand_name) REFERENCES brand(brand_name) ON UPDATE CASCADE
 );
 
 INSERT INTO product (product_name, price, size, url, expiration_date, concern_name, type_name, brand_name)
@@ -100,7 +100,7 @@ CREATE TABLE ingredient (
     is_clean_beauty BOOLEAN,
     is_fragrance_free BOOLEAN,
     product_name VARCHAR(30),
-    FOREIGN KEY (product_name) REFERENCES product(product_name) ON DELETE RESTRICT
+    FOREIGN KEY (product_name) REFERENCES product(product_name) ON DELETE CASCADE
 );
 
 INSERT INTO ingredient (ingredient_name, is_cruelty_free, is_clean_beauty, is_fragrance_free, product_name)
@@ -118,7 +118,7 @@ CREATE TABLE package (
     refill_available BOOLEAN DEFAULT FALSE,
     sustainable_package BOOLEAN DEFAULT FALSE,
     product_name VARCHAR(30),
-    FOREIGN KEY (product_name) REFERENCES product(product_name) ON DELETE RESTRICT
+    FOREIGN KEY (product_name) REFERENCES product(product_name) ON DELETE CASCADE
 );
 
 INSERT INTO package (color, material, weight, refill_available, sustainable_package, product_name)
