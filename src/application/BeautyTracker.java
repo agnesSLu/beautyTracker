@@ -31,18 +31,14 @@ public class BeautyTracker {
             scanner.nextLine(); // Consume newline
 
             switch (choice) {
-                case 1:
-                    addNewProduct(scanner);
-                    break;
-                case 2:
-                    viewAndChooseProducts(scanner);
-                    break;
-                case 3:
+                case 1 -> addNewProduct(scanner);
+                case 2 -> viewAndChooseProducts(scanner);
+                case 3 -> {
                     System.out.println("Exiting application.");
                     scanner.close();
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
@@ -60,8 +56,8 @@ public class BeautyTracker {
             while (resultSet.next()) {
                 productCount++;
                 String productName = resultSet.getString("product_name");
-                double price = resultSet.getDouble("price");
-                int size = resultSet.getInt("price");
+                String price = resultSet.getString("price");
+                String size = resultSet.getString("size");
                 String url = resultSet.getString("url");
                 Date expirationDate = resultSet.getDate("expiration_date");
                 String concernName = resultSet.getString("concern_name");
@@ -104,6 +100,10 @@ public class BeautyTracker {
         String currencySymbol = getCurrencySymbol(scanner);
         System.out.print("Enter the price (" + currencySymbol + "): ");
         double price = scanner.nextDouble();
+        while (price < 0) {
+            System.out.println("Please enter valid price.");
+            price = scanner.nextDouble();
+        }
         scanner.nextLine(); // Consume leftover newline
 
         String sizeUnit = getSizeUnit(scanner);
@@ -136,7 +136,7 @@ public class BeautyTracker {
         List<String> types = List.of(new String[]{"skincare", "makeup", "haircare", "fragrances", "bath&body", "tools&brushes"});
         String typeName = scanner.nextLine();
         while (!types.contains(typeName.toLowerCase())) {
-            System.out.print("Please enter valid type: ");
+            System.out.print("Please enter valid type.");
             typeName = scanner.nextLine();
         }
 
@@ -149,8 +149,8 @@ public class BeautyTracker {
              CallableStatement statement = connection.prepareCall("{CALL addNewProduct(?, ?, ?, ?, ?, ?, ?, ?)}")) {
 
             statement.setString(1, productName);
-            statement.setDouble(2, price);
-            statement.setDouble(3, size);
+            statement.setString(2, currencySymbol + " " + price);
+            statement.setString(3, size + sizeUnit);
             statement.setString(4, url);
             statement.setDate(5, expirationDate);
             statement.setString(6, concernName);
@@ -550,27 +550,23 @@ public class BeautyTracker {
         System.out.println("Would you like to:");
         System.out.println("1. Select a product by name");
         System.out.println("2. Filter products by keyword");
-        System.out.print("Enter your choice: ");
+        System.out.println("Enter your choice: ");
+
         int choice = scanner.nextInt();
+
         scanner.nextLine(); // Consume newline
 
         switch (choice) {
-            case 1:
-                selectProductDirectly();
-                break;
-            case 2:
-                filterProductsByKeyword();
-                break;
-            default:
-                System.out.println("Invalid choice.");
-                break;
+            case 1 -> selectProductDirectly();
+            case 2 -> filterProductsByKeyword();
+            default -> System.out.println("Invalid choice.");
         }
     }
 
     // view product list -> select a product directly
 
     private static void selectProductDirectly() {
-        System.out.print("Enter the product name to select: ");
+        System.out.println("Enter the product name to select: ");
         String productName = scanner.nextLine();
 
         String query = "CALL selectProduct(?)"; // Call the stored procedure
@@ -582,7 +578,7 @@ public class BeautyTracker {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     // Extracting product details
-                    double price = resultSet.getDouble("price");
+                    String price = resultSet.getString("price");
                     String size = resultSet.getString("size");
                     String url = resultSet.getString("url");
                     Date expirationDate = resultSet.getDate("expiration_date");
@@ -604,21 +600,17 @@ public class BeautyTracker {
                     System.out.println("1. Edit Product");
                     System.out.println("2. Delete Product");
                     System.out.println("3. Go Back");
-                    System.out.print("Enter your choice: ");
+                    System.out.println("Enter your choice: ");
                     int choice = scanner.nextInt();
                     scanner.nextLine(); // Consume newline
 
                     switch (choice) {
-                        case 1:
-                            editMenu(); // Call edit menu
-                            break;
-                        case 2:
-                            deleteProduct(productName); // Call method to delete the product
-                            break;
-                        case 3:
+                        case 1 -> editMenu(productName); // Call edit menu
+                        case 2 -> deleteProduct(productName); // Call method to delete the product
+                        case 3 -> {
                             return; // Go back
-                        default:
-                            System.out.println("Invalid choice. Please try again.");
+                        }
+                        default -> System.out.println("Invalid choice. Please try again.");
                     }
                 } else {
                     System.out.println("Product not found.");
@@ -635,7 +627,7 @@ public class BeautyTracker {
     // filter products by any keyword
     private static void filterProductsByKeyword() {
         List<String> filteredProductNames = new ArrayList<>();
-        System.out.print("Enter keyword to search for: ");
+        System.out.println("Enter keyword to search for: ");
         String keyword = scanner.nextLine().trim();
         String searchKeyword = "%" + keyword + "%";
 
@@ -659,6 +651,11 @@ public class BeautyTracker {
         }
 
         if (!filteredProductNames.isEmpty()) {
+            System.out.println("Products after filtering:");
+            int i = 1;
+            for (String s : filteredProductNames) {
+                System.out.println( i++ + ". " + s);
+            }
             System.out.println("Would you like to select a product from these results? (yes/no): ");
             if (scanner.nextLine().equalsIgnoreCase("yes")) {
                 selectAndViewProduct(filteredProductNames);
@@ -718,22 +715,18 @@ public class BeautyTracker {
                     System.out.println("1. Edit this product");
                     System.out.println("2. Delete this product");
                     System.out.println("3. Go back");
-                    System.out.print("Enter your choice: ");
+                    System.out.println("Enter your choice: ");
 
                     int actionChoice = scanner.nextInt();
                     scanner.nextLine(); // Consume newline
 
                     switch (actionChoice) {
-                        case 1:
-                            editMenu(); // Implement this method to edit the product
-                            break;
-                        case 2:
-                            deleteProduct(productName); // Implement this method to delete the product
-                            break;
-                        case 3:
+                        case 1 -> editMenu(productName); // Implement this method to edit the product
+                        case 2 -> deleteProduct(productName); // Implement this method to delete the product
+                        case 3 -> {
                             return; // Go back without any action
-                        default:
-                            System.out.println("Invalid choice. Please try again.");
+                        }
+                        default -> System.out.println("Invalid choice. Please try again.");
                     }
                 } else {
                     System.out.println("Product not found.");
@@ -766,7 +759,7 @@ public class BeautyTracker {
         }
     }
 
-    private static void editMenu() {
+    private static void editMenu(String productName) {
         while (true) {
             System.out.println("\nEdit Menu:");
             System.out.println("1. Edit Product");
@@ -777,44 +770,34 @@ public class BeautyTracker {
             System.out.println("6. Edit Ingredient");
             System.out.println("7. Edit Package");
             System.out.println("8. Go Back");
-            System.out.print("Enter your choice: ");
+            System.out.println("Enter your choice: ");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
             switch (choice) {
-                case 1:
-                    System.out.print("Enter the product name to edit: ");
-                    String productName = scanner.nextLine();
+                case 1 -> {
                     System.out.println("Which field would you like to update? Options: price, size, url, expiration_date, concern_name, type_name, brand_name");
                     System.out.print("Enter the field to update: ");
                     String field = scanner.nextLine().trim();
                     System.out.println("Enter the new value for " + field + " (leave blank to delete):");
                     String newValue = scanner.nextLine().trim();
+                    while (field.equalsIgnoreCase("price") && Double.parseDouble(newValue.trim().substring(1).trim()) < 0) {
+                        System.out.println("Please enter a valid price.");
+                        newValue = scanner.nextLine().trim();
+                    }
                     editProduct(productName, field, newValue);
-                    break;
-                case 2:
-                    editBrand(); // Implement this method
-                    break;
-                case 3:
-                    editType(); // Implement this method
-                    break;
-                case 4:
-                    editConcern(); // Implement this method
-                    break;
-                case 5:
-                    editFunction(); // Implement this method
-                    break;
-                case 6:
-                    editIngredient(); // Implement this method
-                    break;
-                case 7:
-                    editPackage(); // Implement this method
-                    break;
-                case 8:
+                }
+                case 2 -> editBrand(); // Implement this method
+                case 3 -> editType(); // Implement this method
+                case 4 -> editConcern(); // Implement this method
+                case 5 -> editFunction(); // Implement this method
+                case 6 -> editIngredient(); // Implement this method
+                case 7 -> editPackage(); // Implement this method
+                case 8 -> {
                     return; // Exit the edit menu
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
@@ -831,7 +814,17 @@ public class BeautyTracker {
             statement.setString(1, productName);
             statement.setString(2, field);
             statement.setString(3, newValue);
-
+            System.out.println("Do you want to edit " + productName + "? (yes/no)");
+            String answer = scanner.nextLine();
+            while (!answer.equalsIgnoreCase("yes")
+                    && !answer.equalsIgnoreCase("no")){
+                System.out.println("Please give a valid response.");
+                answer = scanner.nextLine();
+            }
+            if (answer.equalsIgnoreCase("no")) {
+                System.out.println("Cancel to update " + productName);
+                return;
+            }
             statement.execute();
             System.out.println("Product '" + productName + "' has been updated.");
         } catch (SQLException e) {
@@ -841,10 +834,10 @@ public class BeautyTracker {
 
 
     private static void editType() {
-        System.out.print("Enter the type to update (e.g., skincare, makeup): ");
+        System.out.println("Enter the type to update (e.g., skincare, makeup): ");
         String typeName = scanner.nextLine().trim();
 
-        System.out.print("Enter the new name for the type '" + typeName + "': ");
+        System.out.println("Enter the new name for the type '" + typeName + "': ");
         String newTypeName = scanner.nextLine().trim();
 
         String query = "CALL updateType(?, ?)";
@@ -867,12 +860,12 @@ public class BeautyTracker {
 
 
     private static void editBrand() {
-        System.out.print("Enter the brand name to update: ");
+        System.out.println("Enter the brand name to update: ");
         String brandName = scanner.nextLine().trim();
 
         System.out.println("Which field would you like to update for '" + brandName + "'?");
         System.out.println("Options: b_description, country_of_origin, founding_year, email, tel, founder");
-        System.out.print("Enter the field to update: ");
+        System.out.println("Enter the field to update: ");
         String field = scanner.nextLine().trim();
 
         List<String> validFields = Arrays.asList("b_description", "country_of_origin", "founding_year", "email", "tel", "founder");
@@ -923,17 +916,17 @@ public class BeautyTracker {
         System.out.print("Enter the function name to update: ");
         String functionName = scanner.nextLine().trim();
 
-        System.out.print("Enter the new name for the function: ");
+        System.out.println("Enter the new name for the function: ");
         String newFunctionName = scanner.nextLine().trim();
 
-        System.out.print("Enter the new description for the function (leave blank if not applicable): ");
+        System.out.println("Enter the new description for the function (leave blank if not applicable): ");
         String newDescription = scanner.nextLine().trim();
 
         boolean deleteDescription = newDescription.isEmpty();
 
         // Confirm before deleting the description
         if (deleteDescription) {
-            System.out.print("Are you sure you want to delete the description? (yes/no): ");
+            System.out.println("Are you sure you want to delete the description? (yes/no): ");
             String confirmation = scanner.nextLine().trim();
             if (!confirmation.equalsIgnoreCase("yes")) {
                 System.out.println("Update cancelled.");
@@ -967,12 +960,12 @@ public class BeautyTracker {
     }
 
     private static void editIngredient() {
-        System.out.print("Enter the ingredient name to update: ");
+        System.out.println("Enter the ingredient name to update: ");
         String ingredientName = scanner.nextLine().trim();
 
         System.out.println("Which field would you like to update for '" + ingredientName + "'?");
         System.out.println("Options: ingredient_name, is_cruelty_free, is_clean_beauty, is_fragrance_free");
-        System.out.print("Enter the field to update: ");
+        System.out.println("Enter the field to update: ");
         String field = scanner.nextLine().trim();
 
         List<String> validFields = Arrays.asList("ingredient_name", "is_cruelty_free", "is_clean_beauty", "is_fragrance_free");
@@ -981,11 +974,11 @@ public class BeautyTracker {
             return;
         }
 
-        System.out.print("Enter the new value for " + field + " (leave blank to delete, true/false for booleans): ");
+        System.out.println("Enter the new value for " + field + " (leave blank to delete, true/false for booleans): ");
         String newValue = scanner.nextLine().trim();
 
         if (newValue.isEmpty()) {
-            System.out.print("Are you sure you want to delete this field? (yes/no): ");
+            System.out.println("Are you sure you want to delete this field? (yes/no): ");
             if (!scanner.nextLine().trim().equalsIgnoreCase("yes")) {
                 System.out.println("Update cancelled.");
                 return;
@@ -1016,12 +1009,12 @@ public class BeautyTracker {
 
 
     private static void editPackage() {
-        System.out.print("Enter the product name to update its package: ");
+        System.out.println("Enter the product name to update its package: ");
         String productName = scanner.nextLine().trim();
 
         System.out.println("Which field would you like to update for the package of '" + productName + "'?");
         System.out.println("Options: color, material, weight, refill_available, sustainable_package");
-        System.out.print("Enter the field to update: ");
+        System.out.println("Enter the field to update: ");
         String field = scanner.nextLine().trim();
 
         List<String> validFields = Arrays.asList("color", "material", "weight", "refill_available", "sustainable_package");

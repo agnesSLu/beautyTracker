@@ -22,8 +22,8 @@ DELIMITER //
 
 CREATE PROCEDURE addNewProduct(
     IN p_productName VARCHAR(255),
-    IN p_price DECIMAL(10,2),
-    IN p_size DECIMAL(10,2),
+    IN p_price VARCHAR(512),
+    IN p_size VARCHAR(512),
     IN p_url VARCHAR(512),
     IN p_expirationDate DATE,
     IN p_concernName VARCHAR(30),
@@ -90,7 +90,7 @@ BEGIN
     IF EXISTS (SELECT * FROM brand WHERE brand_name = p_brand_name) THEN
         UPDATE brand
         SET b_description = p_description,
-            country_of_origin = p_country,
+            country_of_origin = p_country,ViewSelectedProduct
             founding_year = p_founding_year,
             email = p_email,
             tel = p_tel,
@@ -264,7 +264,6 @@ DELIMITER //
 
 CREATE PROCEDURE editProduct(IN productName VARCHAR(30), IN fieldToUpdate VARCHAR(30), IN newValue VARCHAR(512))
 BEGIN
-    -- Check if the product exists
     IF NOT EXISTS (SELECT * FROM product WHERE product_name = productName) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Product does not exist.';
     ELSE
@@ -276,10 +275,6 @@ BEGIN
 
             -- Set the appropriate value type based on the field
 			CASE fieldToUpdate
-				WHEN 'price' THEN
-					SET @newValue = CAST(newValue AS DECIMAL(10, 2));
-				WHEN 'size' THEN
-					SET @newValue = CAST(newValue AS UNSIGNED); -- Changed from INT to UNSIGNED
 				WHEN 'expiration_date' THEN
 					IF newValue = '' THEN
 						SET @newValue = NULL;
@@ -298,7 +293,7 @@ BEGIN
             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid field selected.';
         END IF;
     END IF;
-END //
+END//
 
 DELIMITER ;
 

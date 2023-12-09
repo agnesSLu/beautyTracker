@@ -72,7 +72,7 @@ VALUES
 DROP TABLE IF EXISTS product;
 CREATE TABLE product (
     product_name VARCHAR(30) PRIMARY KEY NOT NULL,
-    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+    price VARCHAR(512) NOT NULL,
     size VARCHAR(10),
     url VARCHAR(512),
     expiration_date DATE,
