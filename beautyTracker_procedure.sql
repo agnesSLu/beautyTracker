@@ -90,7 +90,7 @@ BEGIN
     IF EXISTS (SELECT * FROM brand WHERE brand_name = p_brand_name) THEN
         UPDATE brand
         SET b_description = p_description,
-            country_of_origin = p_country,ViewSelectedProduct
+            country_of_origin = p_country,
             founding_year = p_founding_year,
             email = p_email,
             tel = p_tel,
